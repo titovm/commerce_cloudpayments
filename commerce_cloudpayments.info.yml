@@ -1,0 +1,8 @@
+name: 'Commerce CloudPayments'
+type: module
+description: 'Provides CloudPayments payment gateway integration with Commerce 2.'
+package: 'Commerce (Payment)'
+core_version_requirement: '^10'
+dependencies:
+  - drupal:commerce
+  - drupal:commerce_payment

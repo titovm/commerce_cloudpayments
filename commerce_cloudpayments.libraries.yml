@@ -1,0 +1,9 @@
+cloudpayments:
+  js:
+    https://widget.cloudpayments.ru/bundles/cloudpayments.js: { type: external, minified: true }
+    js/cloudpayments.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

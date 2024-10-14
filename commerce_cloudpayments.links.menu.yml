@@ -1,0 +1,6 @@
+commerce_cloudpayments.settings:
+  title: 'Commerce CloudPayments'
+  description: 'Settings for the CloudPayments payment gateway.'
+  parent: system.admin_config_services
+  route_name: commerce_cloudpayments.settings
+  weight: 100
