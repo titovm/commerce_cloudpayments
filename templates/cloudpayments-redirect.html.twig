@@ -1,3 +1,31 @@
 <div class="cloudpayments-container">
-    <button id="cloudpayments-button">{{ 'Pay with CloudPayments'|t }}</button>
+    <div class="payment-loading">
+        <div class="payment-message">{{ 'Initializing payment system...'|t }}</div>
+        <div class="payment-debug">
+            {% if data %}
+                <!-- Hidden debug info -->
+                <div class="debug-data" style="display: none;" data-order="{{ data.invoiceId }}" data-amount="{{ data.amount }}" data-currency="{{ data.currency }}"></div>
+            {% endif %}
+        </div>
+    </div>
 </div>
+
+<style>
+.cloudpayments-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    padding: 20px;
+}
+
+.payment-loading {
+    text-align: center;
+}
+
+.payment-message {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+</style>

@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Contains commerce_cloudpayments module functionality.
+ */
+
+/**
+ * Implements hook_library_info_build().
+ */
+function commerce_cloudpayments_library_info_build() {
+  $libraries = [];
+  return $libraries;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function commerce_cloudpayments_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if (strpos($form_id, 'commerce_checkout_flow') === 0) {
+    $form['#attached']['library'][] = 'commerce_cloudpayments/cloudpayments';
+  }
+}

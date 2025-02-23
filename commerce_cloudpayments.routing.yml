@@ -9,20 +9,8 @@ commerce_cloudpayments.settings:
 commerce_cloudpayments.notify:
   path: '/cloudpayments/notify'
   defaults:
-    _controller: '\Drupal\commerce_payment\Controller\PaymentNotificationController::notifyPage'
+    _controller: '\Drupal\commerce_cloudpayments\Controller\CloudPaymentsController::notify'
+    _title: 'CloudPayments Notification'
   requirements:
     _access: 'TRUE'
-  options:
-    parameters:
-      commerce_payment_gateway: { type: entity:commerce_payment_gateway }
-
-commerce_cloudpayments.return:
-  path: '/checkout/{commerce_order}/payment/return'
-  defaults:
-    _controller: '\Drupal\commerce_cloudpayments\Controller\CloudPaymentsController::onReturn'
-  requirements:
-    _access: 'TRUE'
-  options:
-    parameters:
-      commerce_order:
-        type: entity:commerce_order
+  methods: [POST]
