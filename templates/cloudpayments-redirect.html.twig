@@ -1,12 +1,6 @@
 <div class="cloudpayments-container">
     <div class="payment-loading">
-        <div class="payment-message">{{ 'Initializing payment system...'|t }}</div>
-        <div class="payment-debug">
-            {% if data %}
-                <!-- Hidden debug info -->
-                <div class="debug-data" style="display: none;" data-order="{{ data.invoiceId }}" data-amount="{{ data.amount }}" data-currency="{{ data.currency }}"></div>
-            {% endif %}
-        </div>
+        <div class="payment-message">{{ 'Инициализация платежной системы...'|t }}</div>
     </div>
 </div>
 

@@ -47,19 +47,19 @@ class CloudPayments extends OffsitePaymentGatewayBase {
 
     $form['public_id'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Public ID'),
-      '#description' => $this->t('Your CloudPayments public ID.'),
+      '#title' => $this->t('Публичный ID'),
+      '#description' => $this->t('Ваш публичный ID CloudPayments.'),
       '#default_value' => $this->configuration['public_id'],
       '#required' => TRUE,
     ];
 
     $form['mode'] = [
       '#type' => 'select',
-      '#title' => $this->t('Mode'),
-      '#description' => $this->t('Choose between test and live mode.'),
+      '#title' => $this->t('Режим'),
+      '#description' => $this->t('Выберите между тестовым и боевым режимом.'),
       '#options' => [
-        'test' => $this->t('Test'),
-        'live' => $this->t('Live'),
+        'test' => $this->t('Тестовый'),
+        'live' => $this->t('Боевой'),
       ],
       '#default_value' => $this->configuration['mode'],
       '#required' => TRUE,
@@ -102,8 +102,6 @@ class CloudPayments extends OffsitePaymentGatewayBase {
    * {@inheritdoc}
    */
   public function onReturn(OrderInterface $order, Request $request) {
-    \Drupal::logger('commerce_cloudpayments')->notice('Payment returned for order @order_id', ['@order_id' => $order->id()]);
-    
     // Don't create a payment yet, wait for the notification webhook
     return FALSE;
   }
@@ -112,12 +110,8 @@ class CloudPayments extends OffsitePaymentGatewayBase {
    * {@inheritdoc}
    */
   public function onCancel(OrderInterface $order, Request $request) {
-    \Drupal::logger('commerce_cloudpayments')->notice('Payment cancelled for order @order_id', ['@order_id' => $order->id()]);
-    
-    // Use the messenger service instead of deprecated drupal_set_message()
     $messenger = \Drupal::messenger();
-    $messenger->addError($this->t('Payment was canceled.'));
-    
+    $messenger->addError($this->t('Платеж был отменен.'));
     return FALSE;
   }
 
@@ -125,17 +119,12 @@ class CloudPayments extends OffsitePaymentGatewayBase {
    * {@inheritdoc}
    */
   public function onNotify(Request $request) {
-    \Drupal::logger('commerce_cloudpayments')->notice('Received notification request');
-
     $content = $request->getContent();
     $data = json_decode($content, TRUE);
 
     if (empty($data)) {
-      throw new PaymentGatewayException('Invalid notification data received');
+      throw new PaymentGatewayException('Получены недопустимые данные уведомления');
     }
-
-    // Log the notification data
-    \Drupal::logger('commerce_cloudpayments')->notice('Notification data: @data', ['@data' => print_r($data, TRUE)]);
 
     return TRUE;
   }

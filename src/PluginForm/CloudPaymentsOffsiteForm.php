@@ -24,7 +24,7 @@ class CloudPaymentsOffsiteForm extends PaymentOffsiteForm {
     // Get payment data from the plugin
     $data = [
       'publicId' => $payment->getPaymentGateway()->getPlugin()->getConfiguration()['public_id'],
-      'description' => t('Order #@number', ['@number' => $payment->getOrderId()]),
+      'description' => t('Заказ №@number', ['@number' => $payment->getOrderId()]),
       'amount' => $payment->getAmount()->getNumber(),
       'currency' => $payment->getAmount()->getCurrencyCode(),
       'invoiceId' => $payment->getOrderId(),
@@ -51,18 +51,7 @@ class CloudPaymentsOffsiteForm extends PaymentOffsiteForm {
       ],
       'message' => [
         '#type' => 'markup',
-        '#markup' => '<div class="payment-loading">' . t('Initializing payment system...') . '</div>',
-      ],
-      'debug_data' => [
-        '#type' => 'container',
-        '#attributes' => [
-          'class' => ['payment-debug'],
-          'style' => 'display: none;',
-        ],
-        'data' => [
-          '#type' => 'markup',
-          '#markup' => '<div class="debug-data" data-order="' . $payment->getOrderId() . '" data-amount="' . $data['amount'] . '" data-currency="' . $data['currency'] . '"></div>',
-        ],
+        '#markup' => '<div class="payment-loading">' . t('Инициализация платежной системы...') . '</div>',
       ],
     ];
 

@@ -32,10 +32,10 @@ class CloudPaymentsSettingsForm extends ConfigFormBase {
 
     $form['api_secret'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('API Secret Key'),
+      '#title' => $this->t('Секретный ключ API'),
       '#default_value' => $config->get('api_secret'),
       '#required' => TRUE,
-      '#description' => $this->t('Enter your CloudPayments API Secret Key.'),
+      '#description' => $this->t('Введите ваш секретный ключ API CloudPayments.'),
     ];
 
     return parent::buildForm($form, $form_state);
